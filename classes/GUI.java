@@ -12,6 +12,7 @@ public class GUI
     public GUI()
     {
         frame = new JFrame();
+        frame.setDefaultCloseOperation(3);
         //make fullscreen
         frame.setTitle("");
         frame.setUndecorated(true);
