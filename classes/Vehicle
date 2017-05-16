@@ -1,0 +1,65 @@
+
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
+public class Vehicle
+{
+    private Image car;
+    private int x, y, width, height;
+    private boolean visible;
+    private Tile t;
+    
+    
+    
+    
+    public Vehicle( int x, int y ) //DO NOT CREATE A NEW BOARD OBJECT HERE
+    {
+        setUpImage();
+        
+        width = car.getWidth( null );
+        height = car.getHeight( null );
+        
+        this.x = x;
+        this.y = y;
+        
+        visible = true;
+    }
+    
+    public void setUpImage()
+    {
+        ImageIcon i = new ImageIcon( "src/images/lambo.png" );
+        car = i.getImage();
+    }
+    
+    public Image getImage()
+    {
+        return car;
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
+    }
+    
+    public boolean getVis()
+    {
+        return visible;
+    }
+    
+    public void setVis( boolean cher ) //probably not even necessary (thought it would be helpful but it wasn't)
+    {
+        visible = cher;
+    }
+    
+    public void move() //DO NOT CREATE A NEW BOARD OBJECT HERE
+    {
+        x += 1;
+        if( x > 1000 )
+            visible = false;
+    }
+}
