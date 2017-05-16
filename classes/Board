@@ -1,0 +1,164 @@
+//Cher's VERY helpful and important updates
+//Cher who is wayyyyy better than Allan Tangent
+// idk who wrote all of this ^^ but they're soo smart I wish I could be like her/him
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Board extends JPanel implements ActionListener
+{
+    private Image background;
+    private Sprite j;
+    private Timer timer;
+    private Tile [][] tiles;
+    
+    private Vehicle v; //new stuff
+    
+    public Board()
+    {
+        setUpBoard();
+        
+        v = new Vehicle( j.getX(), j.getY() ); //new stuff
+    }
+    
+    private void setUpBoard()
+    {
+        setUpImage();
+        setUpTiles();
+        
+        setPreferredSize( new Dimension( 800, 800 ) );
+        addKeyListener( new keyUpdater() );
+      	setFocusable( true );
+        
+      	j = new Sprite(); 
+        
+        timer = new Timer( 10, this );
+        timer.start();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    private void setUpTiles() //work in progress
+    {
+        int xVal = 0; 
+        int yVal = 0;
+        
+        for( int x = 0; x < 32; x ++ )
+        {
+            for( int y = 0; y < 32; y ++ )
+            {
+                yVal += 25;
+                tiles[x][y] = new Tile(xVal, yVal);
+            }
+            xVal += 25;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    private void setUpImage()
+    {
+        ImageIcon image = new ImageIcon( "src/images/mappity map.jpg" );
+        background = image.getImage();
+    }
+    
+    @Override
+    public void paintComponent( Graphics g )
+    {
+        g.drawImage( background, 0, 0, null );
+        
+        Graphics2D g2d = ( Graphics2D )g;
+        g2d.drawImage( j.getSpritePic(), j.getX(), j.getY(), this );
+        
+        //highly experimental shiz down there (remove if you want to see some fun)
+        int count = 100;
+        Vehicle [] vroom = new Vehicle[ 6 ];
+        for( int i = 0; i < vroom.length; i++ )
+        {
+            vroom[ i ] = new Vehicle( 40, count );
+            count += 75;
+        }
+        
+        for( Vehicle b: vroom )
+        {
+            g2d.drawImage( b.getImage(), b.getX(), b.getY(), this ); //new stuff (keep this line to see fun)
+        }
+        
+        Toolkit.getDefaultToolkit().sync();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        if( j.getX() < - 12 ) //weird Cher numbers
+        {
+            j.setX( -12 );
+            j.setdX( 0 );
+        }
+        
+        if( j.getY() < -15 )
+        {
+            j.setY( -15 );
+            j.setdY( 0 );
+        }
+        
+        if( j.getX() > background.getWidth( this ) - 100 )
+        {
+            j.setX( background.getWidth( this ) - 100 );
+            j.setdX( 0 );
+        }
+        
+        if( j.getY() > background.getHeight( this ) - 120 )
+        {
+            j.setY( background.getHeight( this ) - 120 );
+            j.setdY( 0 );
+        }
+        
+        j.move();
+        
+        updateVehicle(); //new stuff
+        
+        repaint();
+    }
+    
+    private class keyUpdater extends KeyAdapter
+    {
+        @Override
+        public void keyReleased( KeyEvent e )
+        {
+            j.keyReleased( e );
+        }
+        
+        @Override
+        public void keyPressed( KeyEvent e )
+        {
+            j.keyPressed( e );
+        }
+    }
+    
+    private void updateVehicle() //new stuff (checks to make sure vehicles move or not)
+    {
+        if( v.getVis() )
+            v.move();
+    }
+    
+    public Image getBackgroundPic()
+    {
+        return background;
+    }
+}
