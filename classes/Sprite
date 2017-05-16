@@ -1,0 +1,87 @@
+
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+
+public class Sprite
+{
+    private int dx, dy, x , y;
+    private Image spritePic;
+    private Tile t;
+    
+    
+    
+    
+    
+    public Sprite()
+    {
+        setUpSprite();
+    }
+
+    private void setUpSprite()
+    {
+        ImageIcon sprite1 = new ImageIcon( "src/images/jasonsprite.png" );
+        spritePic = sprite1.getImage();
+        x = 40;
+        y = 60;
+    }
+    
+    public void move()
+    {
+        x += dx;
+        y += dy;
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
+    }
+    
+    public void setX( int num )
+    {
+        x = num;
+    }
+    
+    public void setdX( int num )
+    {
+        dx = num;
+    }
+    
+    public void setY( int num )
+    {
+        y = num;
+    }
+    
+    public void setdY( int num )
+    {
+        dy = num;
+    }
+    
+    public Image getSpritePic()
+    {
+        return spritePic;
+    }
+    
+    public void keyPressed( KeyEvent e )
+    {
+        int key = e.getKeyCode();
+        if( key == KeyEvent.VK_LEFT )
+            dx = -5;
+        if( key == KeyEvent.VK_RIGHT )
+            dx = 5;
+        if( key == KeyEvent.VK_UP )
+            dy = -5;
+        if( key == KeyEvent.VK_DOWN )
+            dy = 5;
+    }
+    
+    public void keyReleased( KeyEvent e )
+    {
+        dx = dy = 0;
+    }
+}
