@@ -1,11 +1,13 @@
 public class Tile
 {
     private int xVal, yVal;
+    private boolean b;
     
-    public Tile( int x, int y )
+    public Tile( int x, int y, boolean b )
     {
         xVal = x;
         yVal = y;
+        this.b = b;
     }
     
     public int getX()
@@ -28,6 +30,14 @@ public class Tile
         yVal = y;
     }
     
+    public boolean ifSprite()
+    {
+        return b;
+    }
     
+    public void setIfSprite( boolean b )
+    {
+        this.b = b;
+    }
     
 }
