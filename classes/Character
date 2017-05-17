@@ -1,0 +1,76 @@
+
+import java.awt.Image;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+
+public class Character extends Sprite
+{
+    private int dx, dy;
+    private Tile t;
+    
+    public Character( int x, int y, ImageIcon i)
+    {
+        super( x, y , i );
+        
+        t = new Tile( x, y, true );
+        dx = 0;
+        dy = 0;
+    }
+    
+    public void move()
+    {
+        t.setX( getX() + dx ); 
+        t.setY( getY() + dx ); 
+    }
+    
+    public int getX()
+    {
+        return t.getX();
+    }
+    
+    public int getY()
+    {
+        return t.getY();
+    }
+    
+    public void setX( int num )
+    {
+        t.setX( num );
+    }
+    
+    public void setdX( int num )
+    {
+        dx = num;
+    }
+    
+    public void setY( int num )
+    {
+        t.setY( num );
+    }
+    
+    public void setdY( int num )
+    {
+        dy = num;
+    }
+    
+    public void keyPressed( KeyEvent e )
+    {
+        int key = e.getKeyCode();
+        if( key == KeyEvent.VK_LEFT )
+            dx = -5;
+        if( key == KeyEvent.VK_RIGHT )
+            dx = 5;
+        if( key == KeyEvent.VK_UP )
+            dy = -5;
+        if( key == KeyEvent.VK_DOWN )
+            dy = 5;
+    }
+    
+    public void keyReleased( KeyEvent e )
+    {
+        dx = dy = 0;
+    }
+    
+    
+    
+}
