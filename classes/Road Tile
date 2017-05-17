@@ -1,0 +1,37 @@
+
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
+public class RoadTile extends Sprite
+{
+    private int width, height; //size of image
+    private Tile t;
+    
+    public RoadTile( int x, int y, ImageIcon i ) //DO NOT CREATE A NEW BOARD OBJECT HERE
+    {
+        super(x, y, i); //for extending sprite class        
+        
+        //size of image 
+        width = this.getSpritePic().getWidth( null );
+        height = this.getSpritePic().getHeight( null );
+        
+        //initializes location of tile
+        t = new Tile( x, y, true );
+    }    
+    
+    public int getX()
+    {
+        return t.getX();
+    }
+    
+    public int getY()
+    {
+        return t.getY();
+    }
+    
+    public Tile getTile()
+    {
+        return t;
+    }
+    
+}
