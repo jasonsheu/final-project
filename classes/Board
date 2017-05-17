@@ -19,62 +19,53 @@ public class Board extends JPanel implements ActionListener
     {
         setUpBoard();
         
-        v = new Vehicle( j.getX(), j.getY() ); //new stuff
+        v = new Vehicle( j.getX(), j.getY() , new ImageIcon( "src/images/lambo.png" ) ); //new stuff
     }
     
     private void setUpBoard()
     {
-        setUpImage();
-        setUpTiles();
+        //Set up image
+        ImageIcon image = new ImageIcon( "src/images/mappity map.jpg" );
+        background = image.getImage();
+        
+        
+        //setUpTiles();
         
         setPreferredSize( new Dimension( 800, 800 ) );
         addKeyListener( new keyUpdater() );
       	setFocusable( true );
         
-      	j = new Sprite(); 
+      	j = new Character( 25, 50, new ImageIcon( "src/images/jasonsprite.png" ) ); 
         
         timer = new Timer( 10, this );
         timer.start();
+        
+        tiles = new Tile[32][32];
     }
     
     
     
-    
-    
-    
-    
-    
-    private void setUpTiles() //work in progress
+    private void setUpTiles()
     {
         int xVal = 0; 
         int yVal = 0;
+        
+        int roads = 0;
         
         for( int x = 0; x < 32; x ++ )
         {
             for( int y = 0; y < 32; y ++ )
             {
                 yVal += 25;
-                tiles[x][y] = new Tile(xVal, yVal);
+                tiles[x][y] = new Tile(xVal, yVal, false );
             }
             xVal += 25;
         }
         
+        //int ranX = (int)( Math.random() * 32 );
+        //int ranY = (int)( Math.random() * 32 );
         
-        
-        
-        
-        
-        
-        
-        
-        
-    }
-    
-    
-    private void setUpImage()
-    {
-        ImageIcon image = new ImageIcon( "src/images/mappity map.jpg" );
-        background = image.getImage();
+        //tiles[ranX][ranY].setSprite( new Vehicle( tiles[ranX][ranY].getX(), tiles[ranX][ranY].getY() ) );
     }
     
     @Override
@@ -90,13 +81,13 @@ public class Board extends JPanel implements ActionListener
         Vehicle [] vroom = new Vehicle[ 6 ];
         for( int i = 0; i < vroom.length; i++ )
         {
-            vroom[ i ] = new Vehicle( 40, count );
+            vroom[ i ] = new Vehicle( 40, count, new ImageIcon( "src/images/lambo.png"  ));
             count += 75;
         }
         
         for( Vehicle b: vroom )
         {
-            g2d.drawImage( b.getImage(), b.getX(), b.getY(), this ); //new stuff (keep this line to see fun)
+            g2d.drawImage( b.getSpritePic(), b.getX(), b.getY(), this ); //new stuff (keep this line to see fun)
         }
         
         Toolkit.getDefaultToolkit().sync();
@@ -147,7 +138,7 @@ public class Board extends JPanel implements ActionListener
         @Override
         public void keyPressed( KeyEvent e )
         {
-            j.keyPressed( e );
+            ( (Character) j ).keyPressed( e );
         }
     }
     
